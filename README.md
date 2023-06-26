@@ -1,2 +1,2 @@
 # custom-wp-plugins
-My own wordpress plugins
+My own Wordpress plugins
