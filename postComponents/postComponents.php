@@ -115,19 +115,22 @@ function post_component($atts){
     //display the post content
     if($component == "text"){
 
+        //remove plugin shortcode wrapped around the content along with html tags
+        $content = wp_strip_all_tags(preg_replace('/\[\/?et_pb.*?\]/', '', $post["post_content"]));
+
         //if the user specifies a word limit
     	if(isset($atts["limit"])){
-            if (str_word_count($post["post_content"], 0) > $atts["limit"]) {
-                $words = str_word_count($post["post_content"], 2);
+            if (str_word_count($content, 0) > $atts["limit"]) {
+                $words = str_word_count($content, 2);
                 $pos   = array_keys($words);
-                $text  = substr($post["post_content"], 0, $pos[$atts["limit"]]) . '...';
+                $text  = substr($content, 0, $pos[$atts["limit"]]) . '...';
                 return "<a href='" . $link . "''>" . $text . "</a>";
             }
-            return "<a href='" . $link . "''>" . $post["post_content"] . "</a>";
+            return "<a href='" . $link . "''>" . $content . "</a>";
     	} 
         //othwerwise, show full content
         else {
-    		return "<a href='" . $link . "''>" . $post["post_content"] . "</a>";
+    		return "<a href='" . $link . "''>" . $content . "</a>";
     	}
     } 
 
