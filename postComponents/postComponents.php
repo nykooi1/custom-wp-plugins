@@ -51,7 +51,7 @@ WP_Post Object
 )
 
 Docs:
-[postComponent component="[text/image/date]" type=["post_type"] limit="[word_count]"]
+[postComponent component="[title/content/excerpt/image/date]" type=["post_type"] limit="[word_count]"]
 
 */
 
@@ -113,10 +113,16 @@ function post_component($atts){
     }
 
     //display the post content
-    if($component == "text"){
+    if($component == "content" || $component == "excerpt"){
+
+        if($component == "content"){
+            $string = $post["post_content"];
+        } else {
+            $string = $post["post_excerpt"];
+        }
 
         //remove plugin shortcode wrapped around the content along with html tags
-        $content = wp_strip_all_tags(preg_replace('/\[\/?et_pb.*?\]/', '', $post["post_content"]));
+        $content = wp_strip_all_tags(preg_replace('/\[\/?et_pb.*?\]/', '', $string));
 
         //if the user specifies a word limit
     	if(isset($atts["limit"])){
