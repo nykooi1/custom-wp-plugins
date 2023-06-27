@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name:  Post Components
-Description:  Gets any component from the most recent post, or a specified post by ID
+Description:  Pull any component (title/date/content/excerpt/image) from either the most recent post or by id through a shortcode.
 Version:      1.0
 Author:       Noah Kim 
 License:      GPL2
